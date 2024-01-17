@@ -34,7 +34,7 @@ function unauthorized(code){
     if(code===401){
         localStorage.clear();
         sessionStorage.clear();
-        window.location.href="/logout"
+        window.location.href="/login"
     }
 }
 

@@ -14,6 +14,7 @@
 
 
     <link href="{{asset('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css')}}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link href="{{asset('css/jquery.dataTables.min.css')}}" rel="stylesheet" />
     <script src="{{asset('js/jquery-3.7.0.min.js')}}"></script>
@@ -57,11 +58,11 @@
                         <h6>User Name</h6>
                         <hr class="user-dropdown-divider  p-0"/>
                     </div>
-                    <a href="{{url('/user-profile')}}" class="side-bar-item">
+                    <a href="{{url('/userProfile')}}" class="side-bar-item">
                         <span class="side-bar-item-caption">Profile</span>
                     </a>
-                    <a href="{{url('/logout')}}"class="side-bar-item">
-                        <span  class="side-bar-item-caption">Logout</span>
+                    <a onclick="logout()" class="side-bar-item">
+                        <span class="side-bar-item-caption">Logout</span>
                     </a>
                 </div>
             </div>
@@ -73,21 +74,21 @@
 <div id="sideNavRef" class="side-nav-open">
 
     <a href="{{url("/dashboard")}}" class="side-bar-item">
-        <i class="bi bi-graph-up"></i>
+        <i class="fa-solid fa-chart-gantt"></i>
         <span class="side-bar-item-caption">Dashboard</span>
     </a>
 
-    <a href="{{url("/customerPage")}}" class="side-bar-item">
-        <i class="bi bi-people"></i>
-        <span class="side-bar-item-caption">Customer</span>
-    </a>
-
-    <a href="{{url("/categoryPage")}}" class="side-bar-item">
-        <i class="bi bi-list-nested"></i>
+    <a href="{{route('category-list')}}" class="side-bar-item">
+        <i class="fa-solid fa-braille"></i>
         <span class="side-bar-item-caption">Category</span>
     </a>
 
-    <a href="{{url("/productPage")}}" class="side-bar-item">
+    <a href="{{route('customer-list')}}" class="side-bar-item">
+        <i class="fa-solid fa-people-group"></i>
+        <span class="side-bar-item-caption">Customer</span>
+    </a>
+
+    <a href="{{route('product-list')}}" class="side-bar-item">
         <i class="bi bi-bag"></i>
         <span class="side-bar-item-caption">Product</span>
     </a>
@@ -132,12 +133,22 @@
             content.classList.remove("content-expand");
             content.classList.add("content");
         }
-
     }
+</script>
+<script>
+    async function logout(){
+        try{
+            let res = await axios.get('/logout',HeaderToken());
 
-
+            localStorage.clear();
+            sessionStorage.clear();
+            window.location.href = '/user-login';
+        }
+        catch (e){
+            errorToast(e.response.data.message);
+        }
+    }
 </script>
 
 </body>
 </html>
-

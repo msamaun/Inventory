@@ -72,7 +72,7 @@ class UserController extends Controller
 
     function UserLogout(Request $request)
     {
-        $request->user()->tokens()->delete();
+       $request->user()->tokens()->delete();
         return redirect('/user-login');
     }
 

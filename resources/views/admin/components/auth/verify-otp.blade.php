@@ -18,7 +18,8 @@
 </div>
 <script>
     async function VerifyOtp() {
-        let postBody={"email":sessionStorage.getItem("email"), "otp":document.getElementById('otp').value}
+        let postBody={"email":sessionStorage.getItem("email"),
+            "otp":document.getElementById('otp').value}
         showLoader();
         let res=await axios.post("/verify-otp",postBody);
         hideLoader()
