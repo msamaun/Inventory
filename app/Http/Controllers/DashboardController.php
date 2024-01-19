@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
 
-    public function Dashboard()
+    public function Dashboard(Request $request)
     {
         $user_id =Auth::id();
         $customer = customer::where('user_id', $user_id)->count();
@@ -20,7 +20,7 @@ class DashboardController extends Controller
         $category = category::where('user_id', $user_id)->count();
         $invoice = Invoice::where('user_id', $user_id)->count();
         $total = Invoice::where('user_id',$user_id)->sum('total');
-        $vat= Invoice::where('user_id',$user_id)->sum('tax');
+        $vat= Invoice::where('user_id',$user_id)->sum('vat');
         $payable =Invoice::where('user_id',$user_id)->sum('payable');
 
 
