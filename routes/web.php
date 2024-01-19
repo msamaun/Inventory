@@ -38,6 +38,7 @@ Route::view('/userProfile','admin.components.auth.profile')->name('userProfile')
 Route::view('/send-otp','admin.components.auth.sentOtp')->name('send-otp') ;
 Route::view('/verify-otp','admin.components.auth.verify-otp')->name('verify-otp');
 Route::view('/reset-password','admin.components.auth.reset-pass')->name('reset-password');
+Route::view('/sales','admin.pages.dashboard.sale-page')->name('sales');
 
 
 
@@ -75,18 +76,21 @@ Route::post('/product-delete', [ProductController::class, 'ProductDelete']) -> n
 
 //Invoice Web Routes
 Route::post('/invoice-create', [InvoiceController::class, 'InvoiceCreate'])->name('')->middleware('auth:sanctum');
-Route::get('/list-invoice', [InvoiceController::class, 'InvoiceList'])->name('')->middleware('auth:sanctum');
-Route::post('/invoice-details', [InvoiceController::class, 'InvoiceById'])->name('')->middleware('auth:sanctum');
+Route::get('/list-invoice', [InvoiceController::class, 'InvoiceSelect'])->name('')->middleware('auth:sanctum');
+Route::post('/invoice-details', [InvoiceController::class, 'InvoiceDetails'])->name('')->middleware('auth:sanctum');
 Route::post('/invoice-delete', [InvoiceController::class, 'InvoiceDelete'])->name('')->middleware('auth:sanctum');
+
+
 
 
 //Category View Routes
 
-Route::get('/dashboard-summary', [DashboardController::class, 'Dashboard'])->middleware('auth:sanctum');
+Route::get('/dashboard-page', [DashboardController::class, 'dashboard'])->middleware('auth:sanctum');
 
 Route::view('/category-list','admin.pages.dashboard.category')->name('category-list');
 Route::view('/customer-list','admin.pages.dashboard.customer')->name('customer-list');
 Route::view('/product-list','admin.pages.dashboard.product')->name('product-list');
+Route::view('/invoice-list','admin.pages.dashboard.invoice')->name('invoice-list');
 
 
 
