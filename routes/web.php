@@ -5,6 +5,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -86,11 +87,16 @@ Route::post('/invoice-delete', [InvoiceController::class, 'InvoiceDelete'])->nam
 //Category View Routes
 
 Route::get('/dashboard-page', [DashboardController::class, 'dashboard'])->middleware('auth:sanctum');
+Route::get("/sales-report/{FormDate}/{ToDate}", [ReportController::class, 'salesReport'])->middleware('auth:sanctum');
 
 Route::view('/category-list','admin.pages.dashboard.category')->name('category-list');
 Route::view('/customer-list','admin.pages.dashboard.customer')->name('customer-list');
 Route::view('/product-list','admin.pages.dashboard.product')->name('product-list');
 Route::view('/invoice-list','admin.pages.dashboard.invoice')->name('invoice-list');
+Route::view('/reportPage','admin.pages.dashboard.reportPage')->name('reportPage');
+
+
+
 
 
 
